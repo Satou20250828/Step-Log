@@ -127,7 +127,13 @@ UI・デザインについては、装飾を抑え、
 
 ## 設計資料（作成予定）
 - ER図
+
+  <img width="339" height="481" alt="image" src="https://github.com/user-attachments/assets/c47768fa-340d-4772-ad2d-0afe64e7b58c" />
+
 - 画面遷移図
+
+  <img width="360" height="420" alt="image" src="https://github.com/user-attachments/assets/3a279a0d-c0fb-43ee-9cd0-4d149694e183" />
+
 - インフラ構成図
 
 ---
@@ -140,7 +146,7 @@ UI・デザインについては、装飾を抑え、
 
 ---
 
-## 今後の開発予定
+## 今後の開発予定（実装後に記載）
 - 
 - 
 
