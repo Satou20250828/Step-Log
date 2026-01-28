@@ -125,7 +125,7 @@ UI・デザインについては、装飾を抑え、
 
 ---
 
-## 設計資料（作成予定）
+## 設計資料（実装後調整　作成予定）
 - ER図
 
   <img width="339" height="481" alt="image" src="https://github.com/user-attachments/assets/c47768fa-340d-4772-ad2d-0afe64e7b58c" />
