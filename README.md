@@ -1,4 +1,4 @@
-# StepLog
+# サービス名：StepLog
 
 > ※ 本 README は **開発前の設計用 README** です。  
 > 実装の進行にあわせて随時更新します。
