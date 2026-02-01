@@ -1,0 +1,14 @@
+{
+  "name": "Rails-Dev-Env",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "forwardPorts": [3000, 5432],
+  "postCreateCommand": "bundle install",
+  "customizations": {
+    "vscode": {
+      "extensions": ["Shopify.ruby-lsp", "rebornix.Ruby"]
+    }
+  }
+}
