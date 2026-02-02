@@ -1,7 +1,7 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/users.yml
 
 one:
-  session_token: MyString
+  session_token: "test_token_one"
 
 two:
-  session_token: MyString
+  session_token: "test_token_two"
