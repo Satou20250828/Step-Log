@@ -6,6 +6,6 @@ class CreateRecords < ActiveRecord::Migration[7.2]
       t.string :status, null: false
       t.timestamps
     end
-    add_index :records, [:habit_id, :recorded_on], unique: true
+    add_index :records, [ :habit_id, :recorded_on ], unique: true
   end
 end
