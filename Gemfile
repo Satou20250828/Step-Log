@@ -52,6 +52,8 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  # Avoid minitest 6 incompatibility with Rails 7.2.x test runner internals.
+  gem "minitest", "~> 5.0"
   gem "capybara"
   gem "selenium-webdriver"
 end

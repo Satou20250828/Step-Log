@@ -8,6 +8,6 @@ class CreateRecords < ActiveRecord::Migration[7.1]
       t.timestamps
     end
     # 同じユーザーが同じ日に2回記録できないようにする（1日1回制約）
-    add_index :records, [:user_id, :recorded_on], unique: true
+    add_index :records, [ :user_id, :recorded_on ], unique: true
   end
 end
