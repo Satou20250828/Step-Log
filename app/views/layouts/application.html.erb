@@ -17,7 +17,22 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+  <div style="background: yellow; padding: 10px; color: black;">
+    VIEW IS WORKING! <br>
+    
+    Rails Env: <%= Rails.env %> <br>
+    
+    User Object: <%= @current_user.inspect %> <br>
+    
+    <% if @current_user %>
+      UUID:<%= @current_user.session_token %>
+    <% else %>
+      USER IS NIL
+    <% end %>
+  </div>
+
+  <%= yield %>
+</body>
+
 </html>
