@@ -1,0 +1,7 @@
+# test/fixtures/users.yml
+
+one:
+  session_token: "test_token_one"
+
+two:
+  session_token: "test_token_two"

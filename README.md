@@ -50,7 +50,14 @@ StepLog のコンセプトは、行動を継続させることではなく、「
 ---
 
 ## 技術選定（更新版）
-※ 仮選定。実装状況や完成度を優先し、必要に応じて段階的に拡張する。
+※ 実装状況や完成度を優先し、必要に応じて段階的に拡張する。
+
+### バージョン情報
+- **Ruby**: 3.4.1
+- **Ruby on Rails**: 7.2.2
+- **Database**: PostgreSQL 16
+- **Docker**: 28.5.1
+- **Environment**: GitHub Codespaces (Dev Containers)
 
 ---
 
@@ -124,6 +131,18 @@ GitHub Codespaces（devcontainer）を利用することで、
 開発環境の差分を抑え、第三者が同一手順で再現可能な環境を用意する。  
 CodeXは初期セットアップや定型作業の補助として利用し、  
 最終的な構成判断や手順はREADMEおよびIssueに明文化する。
+
+---
+
+### 開発環境構築手順（STEP 1〜8）
+1. **GitHubリポジトリ作成**: README込みでリポジトリを新規作成。
+2. **Codespaces起動**: クラウド上の開発コンテナを立ち上げ。
+3. **Rails初期化**: `gem install rails` および `rails new . --database=postgresql`。
+4. **Docker設定**: `.devcontainer` 内に環境定義ファイルを配置。
+5. **リビルド**: 設定を適用し、Dockerコンテナ内での開発環境を確立。
+6. **DB/コマンド設定**: `database.yml` 修正と `bin/setup`, `bin/dev` の作成。
+7. **動作確認**: `bin/setup` 実行後、Railsの初期画面表示を確認。
+8. **ブランチ運用開始**: `main` を保存し、 `develop` ブランチでの開発フェーズへ移行。
 
 ---
 
