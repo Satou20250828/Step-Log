@@ -24,7 +24,7 @@
       <%= button_to records_path(record: { result: "done" }),
                     method: :post,
                     form: { class: "w-full" },
-                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] #{selected_result == "done" ? "border-4 border-blue-600 bg-blue-600 text-white shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
+                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] py-8 md:p-6 active:scale-95 md:active:scale-100 flex flex-col items-center justify-center md:block text-center md:text-left #{selected_result == "done" ? "border-4 border-blue-600 bg-blue-600 text-white shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
         <span class="icon block text-5xl <%= selected_result == "done" ? "text-white" : "text-blue-600" %>">task_alt</span>
         <span class="mt-3 block text-xl font-extrabold">できた！</span>
       <% end %>
@@ -32,7 +32,7 @@
       <%= button_to records_path(record: { result: "a_little" }),
                     method: :post,
                     form: { class: "w-full" },
-                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] #{selected_result == "a_little" ? "border-4 border-blue-400 bg-blue-400 text-white shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
+                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] py-8 md:p-6 active:scale-95 md:active:scale-100 flex flex-col items-center justify-center md:block text-center md:text-left #{selected_result == "a_little" ? "border-4 border-blue-400 bg-blue-400 text-white shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
         <span class="icon block text-5xl <%= selected_result == "a_little" ? "text-white" : "text-blue-600" %>">trending_flat</span>
         <span class="mt-3 block text-xl font-extrabold">少しだけ</span>
       <% end %>
@@ -40,7 +40,7 @@
       <%= button_to records_path(record: { result: "skipped" }),
                     method: :post,
                     form: { class: "w-full" },
-                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] #{selected_result == "skipped" ? "border-4 border-blue-200 bg-blue-200 text-blue-800 shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
+                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] py-8 md:p-6 active:scale-95 md:active:scale-100 flex flex-col items-center justify-center md:block text-center md:text-left #{selected_result == "skipped" ? "border-4 border-blue-200 bg-blue-200 text-blue-800 shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
         <span class="icon block text-5xl <%= selected_result == "skipped" ? "text-blue-800" : "text-blue-600" %>">hotel</span>
         <span class="mt-3 block text-xl font-extrabold">お休み</span>
       <% end %>

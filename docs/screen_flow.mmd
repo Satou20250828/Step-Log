@@ -1,0 +1,21 @@
+flowchart LR
+  TP[トップページ]:::top --> Q{習慣登録済？}
+
+  Q -- No --> REG[習慣登録画面]
+  REG -- 登録 --> MAIN[メイン画面]:::main
+
+  Q -- Yes --> MAIN
+
+  MAIN -- 履歴 --> HIS[履歴一覧]
+  HIS -- 戻る --> MAIN
+
+  MAIN -- 編集 --> EDIT[習慣編集画面]
+  EDIT -- 更新 --> MAIN
+  EDIT -- キャンセル --> MAIN
+  EDIT -- 削除 --> MAIN
+
+  MAIN -- 記録 --> REC[記録処理<br/>records#create]
+  REC -- 戻る --> MAIN
+
+  classDef top fill:#BFEFCC,stroke:#222,color:#000,stroke-width:1px;
+  classDef main fill:#3DD6E6,stroke:#222,color:#000,stroke-width:1px;
