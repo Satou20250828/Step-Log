@@ -1,4 +1,12 @@
 class RecordsController < ApplicationController
+  def index
+    @records = if current_user.habit
+      current_user.habit.records.order(recorded_on: :desc)
+    else
+      Record.none
+    end
+  end
+
   def create
     @record = current_user.records.find_or_initialize_by(recorded_on: Date.current)
 
