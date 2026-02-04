@@ -1,0 +1,29 @@
+<section class="mx-auto w-full max-w-3xl">
+  <div class="mb-6">
+    <h1 class="text-2xl font-extrabold tracking-tight">行動履歴</h1>
+    <p class="mt-1 text-sm text-[#617c89]">新しい順に表示しています。</p>
+  </div>
+
+  <% if @records.any? %>
+    <ul class="overflow-hidden rounded-2xl border border-[#e4ecef] bg-white">
+      <% @records.each do |record| %>
+        <% label = { "done" => "できた", "a_little" => "少しだけ", "skipped" => "お休み" }[record.result] %>
+        <% badge_class = case record.result
+                         when "done"
+                           "bg-[#DCFCE7] text-[#166534]"
+                         when "a_little"
+                           "bg-[#FEF9C3] text-[#854D0E]"
+                         else
+                           "bg-[#E5E7EB] text-[#374151]"
+                         end %>
+
+        <li class="flex items-center justify-between border-b border-[#edf3f6] px-4 py-3 last:border-b-0">
+          <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-bold <%= badge_class %>"><%= label %></span>
+          <span class="text-sm font-medium text-[#617c89]"><%= record.recorded_on.strftime("%Y/%m/%d") %></span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="rounded-xl border border-[#e4ecef] bg-white px-4 py-4 text-sm text-[#617c89]">まだ記録がありません</p>
+  <% end %>
+</section>
