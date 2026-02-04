@@ -1,18 +1,102 @@
-<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-sm border border-gray-100 text-center">
-  <% if current_user.habit %>
-    <p class="text-gray-400 text-sm mb-1 italic">現在の習慣</p>
-    <h1 class="text-2xl font-bold mb-8 text-gray-800">「<%= current_user.habit.name %>」</h1>
+<section class="mx-auto w-full max-w-5xl">
+  <header class="sticky top-0 z-40 mb-8 rounded-2xl border border-[#dbe2e6] bg-white/95 px-5 py-4 shadow-sm backdrop-blur">
+    <div class="grid grid-cols-3 items-center gap-2">
+      <div class="flex items-center gap-2">
+        <div class="grid size-8 place-items-center rounded-lg bg-[#2badee] text-white">
+          <span class="icon text-[18px]">task_alt</span>
+        </div>
+        <p class="font-logo text-xl font-extrabold tracking-tight">StepLog</p>
+      </div>
+      <p class="text-center text-xs font-bold uppercase tracking-[0.18em] text-[#617c89]">
+        Today: <%= Date.current.strftime("%Y/%m/%d") %>
+      </p>
+      <div class="text-right">
+        <%= link_to "習慣の設定", edit_habit_path, class: "inline-flex h-10 items-center rounded-xl border border-[#dbe2e6] px-4 text-sm font-bold hover:bg-[#f7fbfd]" if current_user.habit %>
+      </div>
+    </div>
+  </header>
 
-    <div class="space-y-4">
-      <p class="text-sm text-gray-500">ここに3択ボタンを実装予定</p>
+  <% if current_user.habit %>
+    <div class="mb-8 rounded-3xl border border-[#dbe2e6] bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-[#617c89]">Currently Tracking</p>
+      <h1 class="mt-1 text-3xl font-extrabold tracking-tight">
+        <span class="text-[#2badee]"><%= current_user.habit.name %></span>
+      </h1>
+      <p class="mt-3 inline-flex items-center gap-2 rounded-full bg-[#edf8fd] px-4 py-2 text-sm font-medium text-[#476270]">
+        <span class="icon text-[18px]">info</span>
+        今日はすでに記録済みでも、押し直して更新できます。
+      </p>
+      <% if @today_record %>
+        <% label = { "done" => "できた", "a_little" => "少しだけ", "skipped" => "お休み" }[@today_record.result] %>
+        <p class="mt-3 text-sm font-bold text-[#476270]">今日の記録: <span class="text-[#111618]"><%= label %></span></p>
+      <% end %>
     </div>
 
-    <div class="mt-10 pt-4 border-t border-gray-50">
-      <%= link_to "習慣の設定・削除", edit_habit_path, class: "text-gray-400 text-xs hover:text-blue-500 underline transition" %>
+    <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <%= button_to records_path(record: { result: "done" }),
+                    method: :post,
+                    form: { class: "w-full" },
+                    class: "group w-full rounded-2xl border-4 border-[#2badee] bg-[#2badee] p-6 text-white transition hover:scale-[1.01]" do %>
+        <span class="icon block text-5xl">task_alt</span>
+        <span class="mt-3 block text-xl font-extrabold">できた！</span>
+      <% end %>
+
+      <%= button_to records_path(record: { result: "a_little" }),
+                    method: :post,
+                    form: { class: "w-full" },
+                    class: "group w-full rounded-2xl border-2 border-[#dbe2e6] bg-white p-6 transition hover:border-[#2badee] hover:bg-[#f8fcff]" do %>
+        <span class="icon block text-5xl text-[#2badee]">trending_flat</span>
+        <span class="mt-3 block text-xl font-extrabold">少しだけ</span>
+      <% end %>
+
+      <%= button_to records_path(record: { result: "skipped" }),
+                    method: :post,
+                    form: { class: "w-full" },
+                    class: "group w-full rounded-2xl border-2 border-[#dbe2e6] bg-white p-6 transition hover:border-[#9aaeb8] hover:bg-[#fafcfd]" do %>
+        <span class="icon block text-5xl text-[#9aaeb8]">hotel</span>
+        <span class="mt-3 block text-xl font-extrabold">お休み</span>
+      <% end %>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div class="rounded-3xl border border-[#dbe2e6] bg-white p-8 shadow-sm lg:col-span-1">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#617c89]">Progress Overview</p>
+        <p class="mt-3 text-6xl font-extrabold leading-none text-[#2badee]"><%= @total_recorded_days %></p>
+        <p class="mt-2 text-lg font-bold">Total Days Logged</p>
+        <p class="mt-4 text-sm text-[#617c89]">今月の記録日数: <span class="font-bold text-[#111618]"><%= @this_month_recorded_days %>日</span></p>
+      </div>
+
+      <div class="rounded-3xl border border-[#dbe2e6] bg-white p-6 shadow-sm lg:col-span-2">
+        <div class="mb-3 flex items-center justify-between">
+          <h2 class="text-lg font-extrabold">Recent Logs</h2>
+          <span class="text-xs font-semibold uppercase tracking-[0.1em] text-[#617c89]">latest 7</span>
+        </div>
+        <% if @recent_records.any? %>
+          <ul class="overflow-hidden rounded-2xl border border-[#e4ecef]">
+            <% @recent_records.each do |record| %>
+              <% icon = { "done" => "task_alt", "a_little" => "trending_flat", "skipped" => "hotel" }[record.result] %>
+              <% text = { "done" => "できた", "a_little" => "少しだけ", "skipped" => "お休み" }[record.result] %>
+              <li class="flex items-center justify-between border-b border-[#edf3f6] bg-white px-4 py-3 text-sm last:border-b-0">
+                <span class="inline-flex items-center gap-2 font-semibold">
+                  <span class="icon text-[20px] text-[#2badee]"><%= icon %></span>
+                  <%= text %>
+                </span>
+                <span class="font-medium text-[#617c89]"><%= record.recorded_on.strftime("%-m/%-d") %></span>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="rounded-xl bg-[#f7fbfd] px-4 py-4 text-sm text-[#617c89]">まだ記録がありません。</p>
+        <% end %>
+      </div>
     </div>
   <% else %>
-    <h1 class="text-xl font-bold mb-4 text-gray-800">新しい習慣を始めましょう</h1>
-    <p class="text-gray-500 text-sm mb-8">まずは1つだけ、無理なく続けられる目標を決めます。</p>
-    <%= link_to "習慣を登録する", new_habit_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold shadow-md transition inline-block" %>
+    <div class="mx-auto max-w-2xl rounded-3xl border border-[#dbe2e6] bg-white p-8 text-center shadow-sm">
+      <h1 class="text-2xl font-extrabold tracking-tight">What is your focus?</h1>
+      <p class="mt-2 text-sm text-[#617c89]">まずは1つだけ。小さく続ける目標を登録しましょう。</p>
+      <%= link_to "習慣を登録する",
+                  new_habit_path,
+                  class: "mt-6 inline-flex h-12 items-center justify-center rounded-xl bg-[#2badee] px-6 text-base font-bold text-white transition hover:brightness-105" %>
+    </div>
   <% end %>
-</div>
+</section>
