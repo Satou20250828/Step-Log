@@ -1,11 +1,12 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Manrope", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Outfit", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
 }
 
 @utility font-logo {
-  font-family: "Manrope", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Outfit", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
 }
 
 @utility icon {
@@ -14,4 +15,31 @@
   font-style: normal;
   font-size: 24px;
   line-height: 1;
+}
+
+.bg-mesh {
+  background-color: #f0f9ff;
+  background-image:
+    radial-gradient(at 0% 0%, #dff5ff 0, transparent 50%),
+    radial-gradient(at 50% 0%, #ecfbff 0, transparent 50%),
+    radial-gradient(at 100% 0%, #d8f1ff 0, transparent 50%),
+    radial-gradient(at 100% 100%, #dff5ff 0, transparent 50%),
+    radial-gradient(at 0% 100%, #ecfbff 0, transparent 50%);
+}
+
+.dark .bg-mesh {
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(at 0% 0%, #1e293b 0, transparent 50%),
+    radial-gradient(at 100% 100%, #0b1220 0, transparent 50%);
+}
+
+.footprint {
+  position: absolute;
+  color: rgb(56 189 248 / 0.45);
+  font-size: 2.5rem;
+}
+
+.dark .footprint {
+  color: rgb(56 189 248 / 0.3);
 }

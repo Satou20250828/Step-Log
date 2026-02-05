@@ -15,17 +15,24 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap" rel="stylesheet">
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="min-h-screen bg-[#f0f7fa] text-[#111618]">
-    <div class="pointer-events-none fixed -top-16 -left-10 h-56 w-56 rounded-full bg-[#B3E5FC]/70 blur-3xl"></div>
-    <div class="pointer-events-none fixed -right-8 top-40 h-64 w-64 rounded-full bg-[#80DEEA]/60 blur-3xl"></div>
+  <body class="min-h-screen bg-mesh text-[#111618] transition-colors duration-300 dark:text-slate-100">
 
-    <main class="relative z-10 mx-auto w-full max-w-3xl px-4 pb-10 pt-4 sm:pt-6">
+    <main class="relative z-10 mx-auto w-full max-w-5xl px-4 pb-10 pt-4 sm:pt-8">
       <%= render "shared/header" %>
 
       <% if flash.any? %>

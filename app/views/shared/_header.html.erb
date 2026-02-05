@@ -1,27 +1,27 @@
-<header class="sticky top-0 z-50 mb-4 rounded-2xl border border-[#dbe2e6] bg-white/95 px-5 py-4 shadow-sm backdrop-blur">
+<header class="mb-10 rounded-[2rem] border border-white/70 bg-white/80 px-5 py-4 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-800/80">
   <div class="flex flex-wrap items-center justify-between gap-3">
     <div class="flex flex-wrap items-center gap-2 sm:gap-3">
       <% unless current_page?(root_path) %>
-        <%= link_to root_path, class: "inline-flex h-9 items-center gap-1 rounded-xl border border-[#dbe2e6] px-3 text-sm font-bold text-[#2a4756] hover:bg-[#f7fbfd]" do %>
+        <%= link_to root_path, class: "inline-flex h-9 items-center gap-1 rounded-xl border border-slate-200 px-3 text-sm font-bold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-700" do %>
           <span aria-hidden="true">←</span>
           <span>戻る</span>
         <% end %>
       <% end %>
 
-      <%= link_to root_path, class: "inline-flex items-center gap-2 rounded-xl px-2 py-1 hover:bg-[#f2f8fb]" do %>
-        <div class="grid size-8 place-items-center rounded-lg bg-[#2badee] text-white">
+      <%= link_to root_path, class: "inline-flex items-center gap-2 rounded-xl px-2 py-1 hover:bg-slate-50 dark:hover:bg-slate-700" do %>
+        <div class="grid size-10 place-items-center rounded-xl bg-[#38bdf8] text-white">
           <span class="icon text-[18px]">task_alt</span>
         </div>
-        <span class="font-logo text-xl font-extrabold tracking-tight">StepLog</span>
+        <span class="font-logo text-2xl font-bold tracking-tight text-slate-900 dark:text-white">StepLog</span>
       <% end %>
-      <span class="inline-flex items-center rounded-full bg-[#edf8fd] px-3 py-1 text-sm font-bold text-[#1f5c76]">
+      <span class="inline-flex items-center rounded-full border border-slate-100 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100">
         🔥 <%= current_user.habit&.total_achieved_days.to_i %>日
       </span>
-      <%= link_to "履歴", records_path, class: "inline-flex h-9 items-center rounded-xl border border-[#dbe2e6] px-4 text-sm font-bold text-[#2a4756] hover:bg-[#f7fbfd]" %>
+      <%= link_to "履歴", records_path, class: "inline-flex h-10 items-center rounded-full border border-slate-200 px-6 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-700" %>
     </div>
 
     <% if current_user.habit %>
-      <%= link_to "習慣の設定", edit_habit_path, class: "inline-flex h-9 items-center rounded-xl border border-[#dbe2e6] px-4 text-sm font-bold hover:bg-[#f7fbfd]" %>
+      <%= link_to "習慣の設定", edit_habit_path, class: "inline-flex h-10 items-center rounded-full border border-slate-200 px-5 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-100 dark:hover:bg-slate-700" %>
     <% end %>
   </div>
 </header>
