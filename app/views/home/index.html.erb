@@ -1,2 +1,174 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<section class="mx-auto w-full max-w-5xl">
+  <% if current_user.habit %>
+    <p class="mb-8 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#617c89] dark:text-slate-300">
+      今日: <%= Date.current.strftime("%Y/%m/%d") %>
+    </p>
+
+    <div class="mb-8 rounded-3xl border border-[#dbe2e6] bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+      <p class="text-sm font-semibold text-[#617c89] dark:text-slate-300">継続中の習慣</p>
+      <h1 class="mt-1 text-3xl font-extrabold tracking-tight text-[#111618] dark:text-white">
+        <span class="text-[#2badee]"><%= current_user.habit.name %></span>
+      </h1>
+      <p class="mt-3 inline-flex items-center gap-2 rounded-full bg-[#edf8fd] px-4 py-2 text-sm font-medium text-[#476270] dark:bg-slate-700 dark:text-slate-200">
+        <span class="icon text-[18px]">info</span>
+        今日はすでに記録済みでも、押し直して更新できます。
+      </p>
+      <% if @today_record %>
+        <% label = { "done" => "できた", "a_little" => "少しだけ", "skipped" => "お休み" }[@today_record.result] %>
+        <p class="mt-3 text-sm font-bold text-[#476270] dark:text-slate-300">今日の記録: <span class="text-[#111618] dark:text-white"><%= label %></span></p>
+      <% end %>
+    </div>
+
+    <% selected_result = @today_record&.result %>
+    <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <%= button_to records_path(record: { result: "done" }),
+                    method: :post,
+                    form: { class: "w-full" },
+                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] py-8 md:p-6 active:scale-95 md:active:scale-100 flex flex-col items-center justify-center md:block text-center md:text-left #{selected_result == "done" ? "border-4 border-blue-600 bg-blue-600 text-white shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
+        <span class="icon block text-5xl <%= selected_result == "done" ? "text-white" : "text-blue-600" %>">task_alt</span>
+        <span class="mt-3 block text-xl font-extrabold">できた！</span>
+      <% end %>
+
+      <%= button_to records_path(record: { result: "a_little" }),
+                    method: :post,
+                    form: { class: "w-full" },
+                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] py-8 md:p-6 active:scale-95 md:active:scale-100 flex flex-col items-center justify-center md:block text-center md:text-left #{selected_result == "a_little" ? "border-4 border-blue-400 bg-blue-400 text-white shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
+        <span class="icon block text-5xl <%= selected_result == "a_little" ? "text-white" : "text-blue-600" %>">trending_flat</span>
+        <span class="mt-3 block text-xl font-extrabold">少しだけ</span>
+      <% end %>
+
+      <%= button_to records_path(record: { result: "skipped" }),
+                    method: :post,
+                    form: { class: "w-full" },
+                    class: "group w-full rounded-2xl p-6 transition hover:scale-[1.01] py-8 md:p-6 active:scale-95 md:active:scale-100 flex flex-col items-center justify-center md:block text-center md:text-left #{selected_result == "skipped" ? "border-4 border-blue-200 bg-blue-200 text-blue-800 shadow-md" : "border-2 border-blue-300 bg-white text-blue-800 hover:border-blue-500 hover:bg-blue-50"}" do %>
+        <span class="icon block text-5xl <%= selected_result == "skipped" ? "text-blue-800" : "text-blue-600" %>">hotel</span>
+        <span class="mt-3 block text-xl font-extrabold">お休み</span>
+      <% end %>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div class="rounded-3xl border border-[#dbe2e6] bg-white p-8 shadow-sm dark:border-slate-700 dark:bg-slate-800 lg:col-span-1">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#617c89] dark:text-slate-300">達成状況</p>
+        <p class="mt-3 text-6xl font-extrabold leading-none text-[#2badee]"><%= @total_recorded_days %></p>
+        <p class="mt-2 text-lg font-bold text-[#111618] dark:text-white">積み上げた日数</p>
+        <p class="mt-4 text-sm text-[#617c89] dark:text-slate-300">今月の記録日数: <span class="font-bold text-[#111618] dark:text-white"><%= @this_month_recorded_days %>日</span></p>
+      </div>
+
+      <div class="rounded-3xl border border-[#dbe2e6] bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 lg:col-span-2">
+        <div class="mb-3 flex items-center justify-between">
+          <h2 class="text-lg font-extrabold text-[#111618] dark:text-white">最近の履歴</h2>
+          <span class="text-xs font-semibold uppercase tracking-[0.1em] text-[#617c89] dark:text-slate-300">直近7件</span>
+        </div>
+        <% if @recent_records.any? %>
+          <ul class="overflow-hidden rounded-2xl border border-[#e4ecef] dark:border-slate-700">
+            <% @recent_records.each do |record| %>
+              <% icon = { "done" => "task_alt", "a_little" => "trending_flat", "skipped" => "hotel" }[record.result] %>
+              <% text = { "done" => "できた", "a_little" => "少しだけ", "skipped" => "お休み" }[record.result] %>
+              <li class="flex items-center justify-between border-b border-[#edf3f6] bg-white px-4 py-3 text-sm last:border-b-0 dark:border-slate-700 dark:bg-slate-800">
+                <span class="inline-flex items-center gap-2 font-semibold">
+                  <span class="icon text-[20px] text-[#2badee]"><%= icon %></span>
+                  <span class="text-[#111618] dark:text-slate-100"><%= text %></span>
+                </span>
+                <span class="font-medium text-[#617c89] dark:text-slate-300"><%= record.recorded_on.strftime("%-m/%-d") %></span>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="rounded-xl bg-[#f7fbfd] px-4 py-4 text-sm text-[#617c89] dark:bg-slate-700 dark:text-slate-300">まだ記録がありません。</p>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="pointer-events-none fixed inset-0 z-0">
+      <span class="icon footprint" style="top: 15%; left: 8%; transform: rotate(15deg);">pets</span>
+      <span class="icon footprint" style="top: 22%; left: 14%; transform: rotate(-5deg);">pets</span>
+      <span class="icon footprint" style="top: 35%; left: 10%; transform: rotate(20deg);">pets</span>
+      <span class="icon footprint" style="top: 48%; left: 16%; transform: rotate(-10deg);">pets</span>
+      <span class="icon footprint" style="top: 18%; right: 12%; transform: rotate(-15deg);">pets</span>
+      <span class="icon footprint" style="top: 32%; right: 18%; transform: rotate(25deg);">pets</span>
+      <span class="icon footprint" style="top: 55%; right: 8%; transform: rotate(-5deg);">pets</span>
+      <span class="icon footprint" style="top: 72%; right: 15%; transform: rotate(10deg);">pets</span>
+      <span class="icon footprint" style="top: 85%; right: 20%; transform: rotate(-20deg);">pets</span>
+      <span class="icon footprint" style="top: 90%; left: 20%; transform: rotate(10deg);">pets</span>
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center">
+      <div class="relative mb-16 w-full max-w-3xl">
+        <div class="relative overflow-hidden rounded-[2.5rem] border border-white/70 bg-white/95 p-8 shadow-2xl md:p-14 dark:border-slate-700 dark:bg-slate-800/95">
+          <div class="pointer-events-none absolute inset-0 opacity-5">
+            <svg width="100%" height="100%">
+              <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="currentColor"></circle>
+              </pattern>
+              <rect width="100%" height="100%" fill="url(#dots)"></rect>
+            </svg>
+          </div>
+          <div class="relative z-10 flex flex-col items-center text-center">
+            <h3 class="text-2xl font-bold text-[#111827] md:text-3xl dark:text-white">どんな習慣を始めますか？</h3>
+            <p class="mt-5 text-base text-[#64748b] md:text-xl dark:text-slate-300">まずは1つだけ。小さく続ける目標を登録しましょう。</p>
+            <%= link_to new_habit_path,
+                        class: "mt-10 inline-flex h-14 items-center justify-center gap-2 rounded-[1.75rem] bg-[#38bdf8] px-8 text-xl font-bold text-white shadow-lg shadow-sky-400/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-sky-400/50 md:h-16 md:px-10" do %>
+              <span>習慣を登録する</span>
+              <span class="icon text-[28px]">arrow_forward</span>
+            <% end %>
+            <div class="mt-8 inline-flex items-center gap-2 text-sm text-slate-400 dark:text-slate-500">
+              <span class="icon text-[18px]">verified</span>
+              <span>クレジットカード登録不要・ずっと無料</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mb-24">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-[#2badee]">Action Over Perfection</p>
+        <h2 class="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-[#0f172a] md:text-6xl dark:text-white">
+          毎日できなくても、<br>
+          前には進める。
+        </h2>
+        <p class="mt-6 text-xl text-[#617c89] dark:text-slate-300">
+          できた日だけを記録する、罪悪感ゼロの習慣管理アプリ。<br>
+          あなたのペースで、少しずつ。
+        </p>
+      </div>
+
+      <div class="mb-24 grid w-full grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="flex flex-col items-center px-4 text-center">
+          <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-sky-100 text-[#38bdf8] dark:bg-sky-900/40">
+            <span class="icon text-[32px]">accessibility_new</span>
+          </div>
+          <h4 class="mb-3 text-3xl font-extrabold text-[#0f172a] dark:text-white">ハードルを地面まで</h4>
+          <p class="text-lg leading-relaxed text-[#617c89] dark:text-slate-300">「1分だけ」でOK。完璧主義を捨てて、驚くほど小さな一歩から始めましょう。</p>
+        </div>
+        <div class="flex flex-col items-center px-4 text-center">
+          <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-100 text-amber-500 dark:bg-amber-900/30">
+            <span class="icon text-[32px]">sentiment_satisfied</span>
+          </div>
+          <h4 class="mb-3 text-3xl font-extrabold text-[#0f172a] dark:text-white">罪悪感よ、さらば</h4>
+          <p class="text-lg leading-relaxed text-[#617c89] dark:text-slate-300">できない日があっても、あなたの価値は変わりません。また明日始めればいいだけ。</p>
+        </div>
+        <div class="flex flex-col items-center px-4 text-center">
+          <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-green-100 text-green-500 dark:bg-green-900/30">
+            <span class="icon text-[32px]">celebration</span>
+          </div>
+          <h4 class="mb-3 text-3xl font-extrabold text-[#0f172a] dark:text-white">「できた」を祝おう</h4>
+          <p class="text-lg leading-relaxed text-[#617c89] dark:text-slate-300">どんなに些細なことでも、行動した自分を褒める習慣が自信に繋がります。</p>
+        </div>
+      </div>
+
+      <footer class="w-full border-t border-slate-200 pt-8 text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
+        <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <div class="inline-flex items-center gap-2">
+            <span class="icon text-[18px]">calendar_today</span>
+            <span>今日: <%= Date.current.strftime("%Y/%m/%d") %></span>
+          </div>
+          <p>© <%= Date.current.year %> StepLog. Designed for kindness.</p>
+          <div class="flex items-center gap-6">
+            <%= link_to "利用規約", terms_path, class: "hover:text-[#2badee] dark:hover:text-sky-300" %>
+            <%= link_to "プライバシー", privacy_path, class: "hover:text-[#2badee] dark:hover:text-sky-300" %>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  <% end %>
+</section>

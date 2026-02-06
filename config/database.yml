@@ -15,9 +15,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
-  user: postgres
-  password: postgres
+  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
+  user: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "postgres" } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -79,7 +79,4 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: step_log_production
-  username: step_log
-  password: <%= ENV["STEP_LOG_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>

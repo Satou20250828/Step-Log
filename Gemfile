@@ -43,6 +43,10 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # RSpec + Factory Bot for tests
+  gem "rspec-rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -54,5 +58,12 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "minitest", "~> 5.0"
+
+  # Test data + matchers
+  gem "faker"
+  gem "shoulda-matchers"
 end
+
+gem "tailwindcss-rails", "~> 4.4"
+
+gem "redcarpet", "~> 3.6"

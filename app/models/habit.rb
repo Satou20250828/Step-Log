@@ -1,6 +1,8 @@
 class Habit < ApplicationRecord
   belongs_to :user
-  has_many :records, dependent: :destroy
-  validates :name, presence: true
-  validates :user_id, uniqueness: true
+  has_many :records, through: :user
+
+  def total_achieved_days
+    records.where.not(result: :skipped).count
+  end
 end
