@@ -79,7 +79,4 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: step_log_production
-  username: step_log
-  password: <%= ENV["STEP_LOG_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
