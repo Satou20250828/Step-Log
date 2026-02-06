@@ -43,6 +43,10 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # RSpec + Factory Bot for tests
+  gem "rspec-rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -52,10 +56,12 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  # Avoid minitest 6 incompatibility with Rails 7.2.x test runner internals.
-  gem "minitest", "~> 5.0"
   gem "capybara"
   gem "selenium-webdriver"
+
+  # Test data + matchers
+  gem "faker"
+  gem "shoulda-matchers"
 end
 
 gem "tailwindcss-rails", "~> 4.4"
