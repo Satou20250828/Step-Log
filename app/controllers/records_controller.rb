@@ -26,5 +26,4 @@ class RecordsController < ApplicationController
   def record_params
     params.require(:record).permit(:result)
   end
-
 end

@@ -8,7 +8,7 @@ class Record < ApplicationRecord
     "skipped" => "今日はリフレッシュ！ゆっくり休んで、明日からまた一歩ずつ。🍵"
   }.freeze
   # 積み上げ（できた・少し）
-  scope :achieved, -> { where(result: [:done, :a_little]) }
+  scope :achieved, -> { where(result: [ :done, :a_little ]) }
   # 今月（記録日ベース）
   scope :this_month, -> { where(recorded_on: Time.zone.today.all_month) }
   validates :recorded_on, uniqueness: { scope: :user_id }
