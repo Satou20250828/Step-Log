@@ -46,7 +46,7 @@ jobs:
         run: bin/rubocop -f github
 
       - name: Prepare database
-        run: bin/rails db:prepare
+        run: bin/rails db:test:prepare
 
       - name: Build check (Rails boot)
         run: bundle exec rails zeitwerk:check

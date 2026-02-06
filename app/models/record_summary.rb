@@ -9,6 +9,28 @@ class RecordSummary
     records.achieved.count
   end
 
+  def total_days
+    records.count
+  end
+
+  def consecutive_days
+    dates = records_ordered.pluck(:recorded_on)
+    return 0 if dates.empty?
+
+    first = dates.first
+    return 0 if first < (@date - 1)
+
+    streak = 1
+    dates.drop(1).each do |date|
+      break unless date == (first - 1)
+
+      streak += 1
+      first = date
+    end
+
+    streak
+  end
+
   def this_month_recorded_days
     records.this_month.count
   end
