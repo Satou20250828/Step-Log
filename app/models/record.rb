@@ -11,7 +11,7 @@ class Record < ApplicationRecord
   scope :achieved, -> { where(result: [ :done, :a_little ]) }
   # 今月（記録日ベース）
   scope :this_month, -> { where(recorded_on: Time.zone.today.all_month) }
-  validates :recorded_on, uniqueness: { scope: :user_id }
+  validates :recorded_on, uniqueness: { scope: :user_id, message: "今日はすでに記録済みです" }
 
   def self.notice_for(result)
     NOTICE_MESSAGES[result.to_s] || "記録しました！"
