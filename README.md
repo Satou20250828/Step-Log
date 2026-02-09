@@ -281,6 +281,135 @@ flowchart LR
 ### インフラ構成図
 
 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" style="font-family: sans-serif;">
+  <!-- Define styles -->
+  <defs>
+    <style>
+      .box { fill: #ffffff; stroke: #333; stroke-width: 2; }
+      .subgraph { fill: #f0f8ff; stroke: #4682b4; stroke-width: 2; }
+      .arrow { stroke: #333; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .text { font-size: 14px; fill: #333; }
+      .label { font-size: 12px; fill: #555; }
+      .title { font-size: 16px; font-weight: bold; fill: #333; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Production Environment -->
+  <rect class="subgraph" x="50" y="50" width="600" height="380" rx="5"/>
+  <text class="title" x="70" y="80">本番環境 (Render + Neon)</text>
+  
+  <!-- User Browser -->
+  <rect class="box" x="80" y="110" width="180" height="60" rx="3"/>
+  <text class="text" x="170" y="135" text-anchor="middle">ユーザー端末/</text>
+  <text class="text" x="170" y="155" text-anchor="middle">ブラウザ</text>
+  
+  <!-- Render Web Service -->
+  <rect class="box" x="340" y="110" width="180" height="60" rx="3"/>
+  <text class="text" x="430" y="130" text-anchor="middle">Render Web Service</text>
+  <text class="text" x="430" y="150" text-anchor="middle">Rails (Puma)</text>
+  
+  <!-- Neon PostgreSQL -->
+  <rect class="box" x="340" y="240" width="180" height="60" rx="3"/>
+  <text class="text" x="430" y="265" text-anchor="middle">Neon PostgreSQL</text>
+  
+  <!-- Render Storage -->
+  <rect class="box" x="80" y="240" width="180" height="60" rx="3"/>
+  <text class="text" x="170" y="265" text-anchor="middle">Render内ストレージ</text>
+  
+  <!-- Monitoring -->
+  <rect class="box" x="340" y="350" width="180" height="60" rx="3"/>
+  <text class="text" x="430" y="370" text-anchor="middle">監視/アラート</text>
+  <text class="text" x="430" y="390" text-anchor="middle">(Sentry など)</text>
+  
+  <!-- Arrows for Production -->
+  <!-- User to Render -->
+  <path class="arrow" d="M 260 140 L 340 140"/>
+  <text class="label" x="280" y="130">HTTPS</text>
+  
+  <!-- Render to Neon -->
+  <path class="arrow" d="M 430 170 L 430 240"/>
+  <text class="label" x="440" y="205">DATABASE_URL (TLS)</text>
+  
+  <!-- Render to Storage -->
+  <path class="arrow" d="M 340 150 L 260 260"/>
+  <text class="label" x="250" y="190">ActiveStorage</text>
+  <text class="label" x="250" y="205">(local)</text>
+  
+  <!-- Render to Monitoring -->
+  <path class="arrow" d="M 430 170 L 430 350"/>
+  <text class="label" x="440" y="260">Logs/Errors</text>
+
+  <!-- CI/CD Environment -->
+  <rect class="subgraph" x="700" y="50" width="650" height="200" rx="5"/>
+  <text class="title" x="720" y="80">CI/CD</text>
+  
+  <!-- GitHub Repo -->
+  <rect class="box" x="730" y="110" width="180" height="60" rx="3"/>
+  <text class="text" x="820" y="145" text-anchor="middle">GitHub Repo</text>
+  
+  <!-- GitHub Actions -->
+  <rect class="box" x="980" y="110" width="180" height="60" rx="3"/>
+  <text class="text" x="1070" y="130" text-anchor="middle">GitHub Actions</text>
+  <text class="text" x="1070" y="150" text-anchor="middle">Tests/Lint</text>
+  
+  <!-- CI/CD Arrows -->
+  <path class="arrow" d="M 910 140 L 980 140"/>
+  <text class="label" x="925" y="130">Push/PR</text>
+  
+  <path class="arrow" d="M 1070 170 Q 1070 250 520 180"/>
+  <text class="label" x="800" y="220">Deploy Hook</text>
+
+  <!-- Backup Environment -->
+  <rect class="subgraph" x="700" y="300" width="650" height="130" rx="5"/>
+  <text class="title" x="720" y="330">バックアップ</text>
+  
+  <!-- Neon Backup -->
+  <rect class="box" x="980" y="350" width="180" height="60" rx="3"/>
+  <text class="text" x="1070" y="385" text-anchor="middle">Neon Backup</text>
+  
+  <!-- Backup Arrow -->
+  <path class="arrow" d="M 520 270 Q 750 270 980 380"/>
+  <text class="label" x="700" y="260">自動バックアップ/PITR</text>
+
+  <!-- Development Environment -->
+  <rect class="subgraph" x="50" y="480" width="600" height="200" rx="5"/>
+  <text class="title" x="70" y="510">開発環境 (ローカル/コンテナ)</text>
+  
+  <!-- Developer Browser -->
+  <rect class="box" x="80" y="540" width="180" height="60" rx="3"/>
+  <text class="text" x="170" y="565" text-anchor="middle">開発者ブラウザ</text>
+  
+  <!-- Local Rails -->
+  <rect class="box" x="340" y="540" width="180" height="60" rx="3"/>
+  <text class="text" x="430" y="560" text-anchor="middle">ローカル Rails</text>
+  <text class="text" x="430" y="580" text-anchor="middle">(Puma)</text>
+  
+  <!-- Local PostgreSQL -->
+  <ellipse class="box" cx="170" cy="640" rx="90" ry="30"/>
+  <text class="text" x="170" y="645" text-anchor="middle">PostgreSQL</text>
+  
+  <!-- Development Arrows -->
+  <path class="arrow" d="M 260 570 L 340 570"/>
+  <text class="label" x="280" y="560">HTTP</text>
+  
+  <path class="arrow" d="M 340 580 L 260 630"/>
+  <text class="label" x="270" y="600">ActiveRecord</text>
+
+  <!-- Legend -->
+  <text class="title" x="700" y="500" fill="#4682b4">凡例:</text>
+  <rect class="box" x="700" y="520" width="80" height="40" rx="3"/>
+  <text class="label" x="740" y="545" text-anchor="middle">コンポーネント</text>
+  
+  <ellipse class="box" cx="830" cy="540" rx="40" ry="20"/>
+  <text class="label" x="830" y="545" text-anchor="middle">DB</text>
+  
+  <path class="arrow" d="M 900 540 L 980 540"/>
+  <text class="label" x="940" y="530" text-anchor="middle">通信</text>
+</svg>
+
 ---
 
 ## 🚀 今後の展望
