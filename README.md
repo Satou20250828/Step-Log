@@ -195,7 +195,47 @@ http://localhost:3000
 ## 📊 設計資料
 
 ### ER図
-※ ここに画像を貼付
+
+```mermaid
+erDiagram
+  USERS {
+    bigint id PK
+    string session_token "UNIQUE, NOT NULL"
+    datetime created_at
+    datetime updated_at
+  }
+
+  HABITS {
+    bigint id PK
+    bigint user_id FK
+    string name "NOT NULL"
+    datetime created_at
+    datetime updated_at
+  }
+
+  HABIT_LOGS {
+    bigint id PK
+    bigint user_id FK
+    string name
+    string event
+    datetime created_at
+    datetime updated_at
+  }
+
+  RECORDS {
+    bigint id PK
+    bigint user_id FK
+    date recorded_on "NOT NULL"
+    integer result "DEFAULT 0, NOT NULL"
+    datetime created_at
+    datetime updated_at
+  }
+
+  USERS ||--o{ HABITS : has_many
+  USERS ||--o{ HABIT_LOGS : has_many
+  USERS ||--o{ RECORDS : has_many
+
+```
 
 ### 画面遷移図
 ※ ここに画像を貼付
