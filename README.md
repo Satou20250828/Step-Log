@@ -280,6 +280,7 @@ flowchart LR
 
 ### インフラ構成図
 
+---ここから---
 flowchart LR
   subgraph Production["本番環境 (Render + Neon)"]
     U1[ユーザー端末/ブラウザ] -->|HTTPS| R1["Render Web Service<br/>Rails (Puma)"]
@@ -301,6 +302,8 @@ flowchart LR
     U2[開発者ブラウザ] -->|HTTP| W2["ローカル Rails (Puma)"]
     W2 -->|ActiveRecord| D2[(PostgreSQL)]
   end
+---ここまで---
+
 ---
 
 ## 🚀 今後の展望
