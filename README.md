@@ -197,7 +197,12 @@ http://localhost:3000
 ### ER図
 
 ```mermaid
+
 erDiagram
+  USERS ||--o{ HABITS : "管理する"
+  USERS ||--o{ HABIT_LOGS : "操作履歴"
+  HABITS ||--o{ RECORDS : "実施結果を記録"
+
   USERS {
     bigint id PK
     string session_token "UNIQUE, NOT NULL"
@@ -216,24 +221,19 @@ erDiagram
   HABIT_LOGS {
     bigint id PK
     bigint user_id FK
-    string name
     string event
+    string metadata
     datetime created_at
-    datetime updated_at
   }
 
   RECORDS {
     bigint id PK
-    bigint user_id FK
+    bigint habit_id FK
     date recorded_on "NOT NULL"
-    integer result "DEFAULT 0, NOT NULL"
+    integer result
     datetime created_at
     datetime updated_at
   }
-
-  USERS ||--o{ HABITS : has_many
-  USERS ||--o{ HABIT_LOGS : has_many
-  USERS ||--o{ RECORDS : has_many
 
 ```
 
