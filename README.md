@@ -197,7 +197,6 @@ http://localhost:3000
 ### ER図
 
 ```mermaid
-
 erDiagram
   USERS ||--o{ HABITS : "管理する"
   USERS ||--o{ HABIT_LOGS : "操作履歴"
@@ -234,7 +233,6 @@ erDiagram
     datetime created_at
     datetime updated_at
   }
-
 ```
 
 ---
