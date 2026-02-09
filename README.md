@@ -265,7 +265,7 @@ flowchart LR
 
 各画面のプレビューと主な機能の一覧です。
 
-| 画面名 | 概要・主な機能 | プレビュー画像 |
+| 画面名 | プレビュー画像 |
 | :--- | :--- | :--- |
 | **トップページ** |<img width="1895" height="895" alt="スクリーンショット (135)" src="https://github.com/user-attachments/assets/c97ecf05-4187-4f77-8866-7bb97a80dc9a" />|
 | **メイン画面** |<img width="1894" height="891" alt="スクリーンショット (138)" src="https://github.com/user-attachments/assets/c53b378c-9ef8-458b-bff2-cca27fb32540" />|
