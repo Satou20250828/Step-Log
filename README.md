@@ -282,27 +282,6 @@ flowchart LR
 
 ### インフラ構成図
 
-flowchart LR
-  subgraph Production["本番環境 (Render + Neon)"]
-    U1[ユーザー端末/ブラウザ] -->|HTTPS| R1[Render Web Service<br/>Rails (Puma)]
-    R1 -->|DATABASE_URL (TLS)| N1[Neon PostgreSQL]
-    R1 -->|ActiveStorage (local)| S1[Render内ストレージ]
-    R1 -->|Logs/Errors| M1[監視/アラート<br/>(Sentry など)]
-  end
-
-  subgraph CI_CD["CI/CD"]
-    G1[GitHub Repo] -->|Push/PR| A1[GitHub Actions<br/>Tests/Lint]
-    A1 -->|Deploy Hook| R1
-  end
-
-  subgraph Backup["バックアップ"]
-    N1 -->|自動バックアップ/PITR| B1[Neon Backup]
-  end
-
-  subgraph Development["開発環境 (ローカル/コンテナ)"]
-    U2[開発者ブラウザ] -->|HTTP| W2[ローカル Rails (Puma)]
-    W2 -->|ActiveRecord| D2[(PostgreSQL)]
-  end
 ---
 
 ## 🚀 今後の展望
