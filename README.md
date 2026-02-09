@@ -145,3 +145,29 @@ Step Logは、あえて「連続性」を評価の軸から外しました。
 
 ---
 
+## ⚙️ 開発環境・構築手順
+
+### GitHub / Codespaces
+本プロジェクトは **GitHub Codespaces（Dev Containers）** を利用しています。  
+ブラウザさえあれば、ローカル環境構築なしで、すぐに開発・動作確認が可能です。
+
+### 開発環境のスペック
+
+- **コンテナ構成**
+  - Ruby 3.3
+  - Node.js 20
+  - PostgreSQL 16
+
+- **起動ツール**
+  - foreman  
+    （Rails と Tailwind CSS を同時に起動するためのツール）
+
+---
+
+### セットアップ手順
+
+#### 1. リポジトリを Codespaces で開く
+GitHub の **「Code」ボタン** → **「Codespaces」タブ** を選択し、  
+**「Create codespace on main」** をクリックして起動します。
+
+※ コンテナの起動完了まで数分かかる場合があります。
