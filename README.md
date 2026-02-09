@@ -261,7 +261,24 @@ flowchart LR
 ```
 
 ### 画面一覧
-※ 各画面のスクリーンショットを一覧で貼付
+## 画面一覧
+
+各画面のプレビューと主な機能の一覧です。
+
+| 画面名 | 概要・主な機能 | プレビュー画像 |
+| :--- | :--- | :--- |
+| **トップページ** | サービスの入り口。ログインや新規登録を行います。 | ![トップページ](<img width="1895" height="895" alt="スクリーンショット (135)" src="https://github.com/user-attachments/assets/c97ecf05-4187-4f77-8866-7bb97a80dc9a" />
+) |
+| **メイン画面** | 本日の習慣チェックリスト。現在の進捗をひと目で確認できます。 | ![メイン画面](<img width="1894" height="891" alt="スクリーンショット (138)" src="https://github.com/user-attachments/assets/c53b378c-9ef8-458b-bff2-cca27fb32540" />
+) |
+| **習慣登録画面** | 新しい習慣を作成します。 | ![習慣登録画面](<img width="1920" height="885" alt="スクリーンショット (137)" src="https://github.com/user-attachments/assets/31c93f46-d204-402c-84d0-09f5fabfda81" />
+) |
+| **習慣編集画面** | 既存の習慣内容の変更や削除を行います。 | ![習慣編集画面](<img width="1920" height="891" alt="スクリーンショット (140)" src="https://github.com/user-attachments/assets/e7e15d70-7581-40da-ac27-84708fab364e" />
+) |
+| **履歴画面** | カレンダーやグラフで過去の達成記録を振り返ります。 | ![履歴画面](<img width="1889" height="880" alt="スクリーンショット (139)" src="https://github.com/user-attachments/assets/9c73c369-657b-4158-99af-1556c74c6cc6" />
+) |
+| **ダークモード** | 目に優しいダークテーマ表示。全画面で切り替え可能です。 | ![ダークモード](<img width="1890" height="892" alt="スクリーンショット (136)" src="https://github.com/user-attachments/assets/f3526387-f5bb-416b-9e84-852ed8b558a3" />
+) |
 
 ### インフラ構成図
 ※ ここに画像を貼付
