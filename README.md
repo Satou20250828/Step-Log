@@ -280,6 +280,8 @@ flowchart LR
 
 ### インフラ構成図
 
+<img width="1400" height="750" alt="infrastructure-diagram" src="https://github.com/user-attachments/assets/0dd9746e-df83-4eef-8650-0cf4d25abfb3" />
+
 
 ---
 
