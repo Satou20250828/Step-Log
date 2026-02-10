@@ -12,7 +12,7 @@
 ---
 
 - **サービスURL:** https://step-log.onrender.com/
-- **Qiita記事:** [URLを貼る]
+- **Qiita記事:** https://qiita.com/hinata_learning/items/5f1adbbcf3cd85a50418
 
 ---
 ## 🚀 サービス概要（30秒でわかるStep Log）
