@@ -5,7 +5,8 @@
 
 ---
 
-<img width="2000" height="1414" alt="Pro and Con Graphic Organiser in Blue Green Yellow Playful Shapes Style" src="https://github.com/user-attachments/assets/bfb2fcba-6431-4119-9fe1-4a4cf8973b94" />
+<img width="2000" height="1414" alt="Pro and Con Graphic Organiser in Blue Green Yellow Playful Shapes Style" src="https://github.com/user-attachments/assets/a06aa162-2d2d-4b81-a7f0-36fe53429c36" />
+
 
 
 ---
