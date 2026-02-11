@@ -5,9 +5,12 @@ if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/*/libjemalloc.so.2 ]; then
   export LD_PRELOAD="$(echo /usr/lib/*/libjemalloc.so.2)"
 fi
 
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
+# Running DB prepare on every web boot slows cold starts on platforms like Render.
+# Keep it opt-in for production and on-by-default for non-production.
+if [ "${1}" = "./bin/rails" ] && [ "${2}" = "server" ]; then
+  if [ "${RAILS_ENV}" != "production" ] || [ "${RUN_DB_PREPARE_ON_BOOT}" = "true" ]; then
+    ./bin/rails db:prepare
+  fi
 fi
 
 exec "${@}"

@@ -23,6 +23,14 @@
 threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
 threads threads_count, threads_count
 
+# Avoid cluster mode when worker count is 1 (common on small Render instances).
+workers_count = ENV.fetch("WEB_CONCURRENCY", 0).to_i
+if workers_count > 1
+  workers workers_count
+else
+  workers 0
+end
+
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 port ENV.fetch("PORT", 3000)
 

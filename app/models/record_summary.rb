@@ -6,7 +6,7 @@ class RecordSummary
   end
 
   def total_recorded_days
-    records.achieved.count
+    summary_counts[:total_recorded_days]
   end
 
   def total_days
@@ -32,15 +32,15 @@ class RecordSummary
   end
 
   def this_month_recorded_days
-    records.this_month.count
+    summary_counts[:this_month_recorded_days]
   end
 
   def recent_records
-    records.order(recorded_on: :desc).limit(@recent_limit)
+    @recent_records ||= records.order(recorded_on: :desc).limit(@recent_limit).to_a
   end
 
   def today_record
-    records.find_by(recorded_on: @date)
+    @today_record ||= recent_records.find { |record| record.recorded_on == @date }
   end
 
   def records_ordered
@@ -51,5 +51,26 @@ class RecordSummary
 
   def records
     @records ||= @user.records
+  end
+
+  def summary_counts
+    @summary_counts ||= begin
+      achieved_values = [
+        Record.results.fetch("done"),
+        Record.results.fetch("a_little")
+      ].join(",")
+      month_start = Record.connection.quote(@date.beginning_of_month)
+      month_end = Record.connection.quote(@date.end_of_month)
+
+      total_recorded_days, this_month_recorded_days = records.pick(
+        Arel.sql("COUNT(*) FILTER (WHERE result IN (#{achieved_values}))"),
+        Arel.sql("COUNT(*) FILTER (WHERE recorded_on BETWEEN #{month_start} AND #{month_end})")
+      )
+
+      {
+        total_recorded_days: total_recorded_days.to_i,
+        this_month_recorded_days: this_month_recorded_days.to_i
+      }
+    end
   end
 end
