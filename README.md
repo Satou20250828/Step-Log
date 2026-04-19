@@ -276,7 +276,7 @@ flowchart LR
 | **習慣登録画面** | **習慣編集画面** |
 |<img width="1920" height="885" alt="スクリーンショット (137)" src="https://github.com/user-attachments/assets/a326ad91-02c4-41b1-bdfa-f4394ae3922a" />|<img width="1920" height="891" alt="スクリーンショット (140)" src="https://github.com/user-attachments/assets/e7e15d70-7581-40da-ac27-84708fab364e" />|
 | **履歴画面** | **ダークモード** |
-|<img width="1889" height="880" alt="スクリーンショット (139)" src="https://github.com/user-attachments/assets/9c73c369-657b-4158-99af-1556c74c6cc6" />|<img width="1763" height="1578" alt="ダークモード　全体" src="https://github.com/user-attachments/assets/5b9242aa-56dd-4fcc-bbe2-6266e0ce689d" />|
+|<img width="1889" height="880" alt="スクリーンショット (139)" src="https://github.com/user-attachments/assets/9c73c369-657b-4158-99af-1556c74c6cc6" />|<img width="1763" height="1578" alt="ダークモード　全体" src="https://github.com/user-attachments/assets/131d3eef-87c9-4568-a3e7-6f4947edd8e9" />|
 
 ---
 
