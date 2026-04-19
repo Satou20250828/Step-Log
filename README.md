@@ -272,8 +272,7 @@ flowchart LR
 |  |  |
 | :--- | :--- |
 | **トップページ** | **メイン画面** |
-|<img width="1763" height="1578" alt="トップページ" src="https://github.com/user-attachments/assets/f06155ff-8c5c-412b-be80-5ba133e803ee" />
-|<img width="1894" height="891" alt="スクリーンショット (138)" src="https://github.com/user-attachments/assets/c53b378c-9ef8-458b-bff2-cca27fb32540" />|
+|<img width="1763" height="1578" alt="トップページ" src="https://github.com/user-attachments/assets/f06155ff-8c5c-412b-be80-5ba133e803ee" />|<img width="1894" height="891" alt="スクリーンショット (138)" src="https://github.com/user-attachments/assets/c53b378c-9ef8-458b-bff2-cca27fb32540" />|
 | **習慣登録画面** | **習慣編集画面** |
 |<img width="1920" height="885" alt="スクリーンショット (137)" src="https://github.com/user-attachments/assets/31c93f46-d204-402c-84d0-09f5fabfda81" />|<img width="1920" height="891" alt="スクリーンショット (140)" src="https://github.com/user-attachments/assets/e7e15d70-7581-40da-ac27-84708fab364e" />|
 | **履歴画面** | **ダークモード** |
