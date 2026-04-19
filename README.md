@@ -5,7 +5,8 @@
 
 ---
 
-<img width="2000" height="1414" alt="Pro and Con Graphic Organiser in Blue Green Yellow Playful Shapes Style" src="https://github.com/user-attachments/assets/a06aa162-2d2d-4b81-a7f0-36fe53429c36" />
+<img width="2000" height="1414" alt="Step Logヒーロー画像" src="https://github.com/user-attachments/assets/f6b91d4d-e0b5-4eec-a322-1b3a4200d027" />
+
 
 
 
