@@ -274,7 +274,7 @@ flowchart LR
 | **トップページ** | **メイン画面** |
 |<img width="1763" height="1578" alt="トップページ" src="https://github.com/user-attachments/assets/f06155ff-8c5c-412b-be80-5ba133e803ee" />|<img width="1763" height="1299" alt="メイン画面" src="https://github.com/user-attachments/assets/03aa9d60-8e5e-4048-aa8c-8700a6226c71" />|
 | **習慣登録画面** | **習慣編集画面** |
-|<img width="1763" height="807" alt="習慣登録画面" src="https://github.com/user-attachments/assets/e99c79cb-eeca-42db-bc2c-dda7727e13ac" />|<img width="1920" height="891" alt="スクリーンショット (140)" src="https://github.com/user-attachments/assets/e7e15d70-7581-40da-ac27-84708fab364e" />|
+|<img width="1920" height="885" alt="スクリーンショット (137)" src="https://github.com/user-attachments/assets/a326ad91-02c4-41b1-bdfa-f4394ae3922a" />|<img width="1920" height="891" alt="スクリーンショット (140)" src="https://github.com/user-attachments/assets/e7e15d70-7581-40da-ac27-84708fab364e" />|
 | **履歴画面** | **ダークモード** |
 |<img width="1889" height="880" alt="スクリーンショット (139)" src="https://github.com/user-attachments/assets/9c73c369-657b-4158-99af-1556c74c6cc6" />|<img width="1890" height="892" alt="スクリーンショット (136)" src="https://github.com/user-attachments/assets/f3526387-f5bb-416b-9e84-852ed8b558a3" />|
 
