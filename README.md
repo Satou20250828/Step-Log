@@ -288,7 +288,8 @@ flowchart LR
 
 <img width="1400" height="750" alt="infrastructure-diagram" src="https://github.com/user-attachments/assets/0dd9746e-df83-4eef-8650-0cf4d25abfb3" />
 
-
+- ホスティング：Render（無料プラン）
+- 稼働監視：UptimeRobot（HTTP監視・5分間隔）でダウンタイムを検知
 ---
 
 ## 🚀 今後の展望
