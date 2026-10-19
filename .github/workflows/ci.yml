@@ -51,6 +51,9 @@ jobs:
       - name: Build check (Rails boot)
         run: bundle exec rails zeitwerk:check
 
+      - name: Build Tailwind CSS (request specs render the layout)
+        run: bin/rails tailwindcss:build
+
       - name: Run RSpec when present
         if: ${{ hashFiles('spec/**/*') != '' }}
         run: bundle exec rspec
