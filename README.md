@@ -85,7 +85,7 @@ Step Logは、あえて「連続性」を評価の軸から外しました。
 
 ### **3. UX・共通機能**
 - **誰でも簡単に体験（疑似ログイン）**
-閲覧のしやすさを重視し、アカウント登録なしで全機能をすぐに試せます。セッショントークンをCookieで管理することで、登録不要のままユーザー状態を保持する疑似ログイン機能を実装しました。
+  アカウント登録なしで全機能をすぐに試せます。初めて習慣を登録・記録したときにユーザーを作成し、ランダムなセッショントークンを署名付きCookieに保存します。次回からはこのトークンでユーザーを識別するため、ブラウザごとにデータが分かれます。閲覧だけではユーザーを作成しないため、死活監視などのアクセスで不要なデータが増えることもありません。
 - **ダークモード切替**
   Local Storageを活用してモードを保持。夜間の記録でも目に優しいUIを選択できます。
 - **Markdownベースの静的ページ**
@@ -115,7 +115,7 @@ Step Logは、あえて「連続性」を評価の軸から外しました。
 - **開発環境の移行（Codespacesの採用）**
   Windows特有の環境問題を、GitHub Codespaces の導入によりOSに依存しない再現性の高い開発環境を実現し解決しました。
 - **DB整合性の徹底（複合ユニーク制約）**
-  「1日1記録」を守るため、Rails側のバリデーションに加えDBレベルで複合一意性制約（`habit_id` × `recorded_on`）を設定。データの重複を物理的に不可能にしました。
+  「1日1記録」を守るため、Rails側のバリデーションに加えDBレベルで複合一意性制約（`user_id` × `recorded_on`）を設定。データの重複を物理的に不可能にしました。
 
 ---
 
@@ -203,9 +203,9 @@ http://localhost:3000
 
 ```mermaid
 erDiagram
-  USERS ||--o{ HABITS : "管理する"
+  USERS ||--o| HABITS : "管理する（1人1つ）"
   USERS ||--o{ HABIT_LOGS : "操作履歴"
-  HABITS ||--o{ RECORDS : "実施結果を記録"
+  USERS ||--o{ RECORDS : "実施結果を記録"
 
   USERS {
     bigint id PK
@@ -216,7 +216,7 @@ erDiagram
 
   HABITS {
     bigint id PK
-    bigint user_id FK
+    bigint user_id FK "UNIQUE"
     string name "NOT NULL"
     datetime created_at
     datetime updated_at
@@ -225,16 +225,16 @@ erDiagram
   HABIT_LOGS {
     bigint id PK
     bigint user_id FK
-    string event
-    string metadata
+    string name "操作時の習慣名"
+    string event "登録 / 変更 / 削除"
     datetime created_at
   }
 
   RECORDS {
     bigint id PK
-    bigint habit_id FK
+    bigint user_id FK "UNIQUE（user_id × recorded_on）"
     date recorded_on "NOT NULL"
-    integer result
+    integer result "NOT NULL（0:できた 1:少しだけ 2:お休み）"
     datetime created_at
     datetime updated_at
   }
