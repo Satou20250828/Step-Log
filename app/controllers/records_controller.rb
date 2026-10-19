@@ -6,7 +6,7 @@ class RecordsController < ApplicationController
 
   def create
     # Time.zone.today を使用して日付を固定
-    @record = current_user.records.find_or_initialize_by(recorded_on: Time.zone.today)
+    @record = current_user!.records.find_or_initialize_by(recorded_on: Time.zone.today)
     @record.assign_attributes(record_params)
 
     if @record.save
