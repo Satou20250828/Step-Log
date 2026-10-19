@@ -5,7 +5,7 @@ class HabitsController < ApplicationController
   end
 
   def create
-    @habit = current_user.build_habit(habit_params)
+    @habit = current_user!.build_habit(habit_params)
     if @habit.save
       current_user.habit_logs.create!(name: @habit.name, event: "登録")
       redirect_to root_path, notice: "習慣を登録しました！"
@@ -20,6 +20,8 @@ class HabitsController < ApplicationController
 
   def update
     @habit = current_user.habit
+    return redirect_to(new_habit_path) unless @habit
+
     old_name = @habit.name
     if @habit.update(habit_params)
       current_user.habit_logs.create!(name: @habit.name, event: "変更") if old_name != @habit.name
@@ -31,6 +33,8 @@ class HabitsController < ApplicationController
 
   def destroy
     @habit = current_user.habit
+    return redirect_to(new_habit_path) unless @habit
+
     current_user.habit_logs.create!(name: @habit.name, event: "削除")
     @habit.destroy
     redirect_to root_path, notice: "目標を削除しました。記録は履歴に残っています。"
